@@ -13,6 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7ee3c047-86a4-4f37-9404-b93ae9f94f91" name="Changes" comment="implement automated fetching of all student repositories">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cli_ops.rs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/git_ops.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/git_ops.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>

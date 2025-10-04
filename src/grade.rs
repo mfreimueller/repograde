@@ -1,4 +1,3 @@
-use std::fs::ReadDir;
 use std::path::{Path, PathBuf};
 use crate::git_ops::log;
 

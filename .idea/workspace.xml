@@ -11,12 +11,9 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ee3c047-86a4-4f37-9404-b93ae9f94f91" name="Changes" comment="add core Rust project">
-      <change afterPath="$PROJECT_DIR$/src/cli_ops.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_ops.rs" afterDir="false" />
+    <list default="true" id="7ee3c047-86a4-4f37-9404-b93ae9f94f91" name="Changes" comment="implement automated fetching of all student repositories">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/git_ops.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/git_ops.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "SHELLCHECK.PATH": "I do mind",
     "git-widget-placeholder": "develop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -98,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759587735031</updated>
       <workItem from="1759587736420" duration="41000" />
-      <workItem from="1759587786455" duration="3403000" />
+      <workItem from="1759587786455" duration="3553000" />
     </task>
     <task id="LOCAL-00001" summary="update gitignore">
       <option name="closed" value="true" />
@@ -116,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759588393778</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implement automated fetching of all student repositories">
+      <option name="closed" value="true" />
+      <created>1759591671738</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759591671738</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,17 +134,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update gitignore" />
     <MESSAGE value="add core Rust project" />
-    <option name="LAST_COMMIT_MESSAGE" value="add core Rust project" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/main.rs</url>
-          <line>14</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="implement automated fetching of all student repositories" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement automated fetching of all student repositories" />
   </component>
 </project>

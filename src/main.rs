@@ -9,7 +9,7 @@ mod cli_ops;
 
 use std::io::Write;
 use std::{env, fs};
-use crate::git_ops::update_repos;
+use crate::git_ops::fetch_all_repos;
 
 fn main() {
     let args : Vec<String> = env::args().collect();
@@ -24,5 +24,7 @@ fn main() {
         std::process::exit(exitcode::IOERR);
     }
 
-    update_repos(root_dir);
+    let student_repos = fs::read_dir(root_dir).unwrap();
+
+    fetch_all_repos(student_repos);
 }

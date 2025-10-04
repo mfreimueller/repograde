@@ -1,10 +1,9 @@
 use std::{env, fs};
-use crate::cli_ops::{push_dir, pop_dir};
+use std::fs::ReadDir;
 
-pub fn update_repos(root_dir: &String) {
-    let paths = fs::read_dir(root_dir).unwrap();
-    for path in paths {
-        let path = path.unwrap().path().display().to_string();
+pub fn fetch_all_repos(student_repos: ReadDir) {
+    for repo_path in student_repos {
+        let path = repo_path.unwrap().path().display().to_string();
         fetch(&path);
     }
 }

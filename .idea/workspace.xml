@@ -11,9 +11,9 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ee3c047-86a4-4f37-9404-b93ae9f94f91" name="Changes" comment="implement automated fetching of all student repositories">
+    <list default="true" id="7ee3c047-86a4-4f37-9404-b93ae9f94f91" name="Changes" comment="move listing of student repo dirs into main method and pass list down to functions">
+      <change afterPath="$PROJECT_DIR$/src/grade.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cli_ops.rs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/git_ops.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/git_ops.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
@@ -47,26 +47,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Cargo.Run.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "SHELLCHECK.PATH": "I do mind",
-    "git-widget-placeholder": "develop",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
-    "org.rust.first.attach.projects": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cargo.Run.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="command" value="run --package repograde --bin repograde -- $PROJECT_DIR$/../SPG/4EHIF_POS_2526" />
@@ -97,7 +97,8 @@
       <option name="presentableId" value="Default" />
       <updated>1759587735031</updated>
       <workItem from="1759587736420" duration="41000" />
-      <workItem from="1759587786455" duration="3553000" />
+      <workItem from="1759587786455" duration="5516000" />
+      <workItem from="1759596891103" duration="325000" />
     </task>
     <task id="LOCAL-00001" summary="update gitignore">
       <option name="closed" value="true" />
@@ -123,7 +124,31 @@
       <option name="project" value="LOCAL" />
       <updated>1759591671738</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="refactor git_ops by moving reading list of student-repos into main function, as we need it afterwards">
+      <option name="closed" value="true" />
+      <created>1759591839204</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759591839204</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor git_ops, move set_current_dir functionality into DirStackGuard struct">
+      <option name="closed" value="true" />
+      <created>1759592337849</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759592337849</updated>
+    </task>
+    <task id="LOCAL-00006" summary="move listing of student repo dirs into main method and pass list down to functions">
+      <option name="closed" value="true" />
+      <created>1759597185672</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759597185672</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +161,20 @@
     <MESSAGE value="update gitignore" />
     <MESSAGE value="add core Rust project" />
     <MESSAGE value="implement automated fetching of all student repositories" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement automated fetching of all student repositories" />
+    <MESSAGE value="refactor git_ops by moving reading list of student-repos into main function, as we need it afterwards" />
+    <MESSAGE value="refactor git_ops, move set_current_dir functionality into DirStackGuard struct" />
+    <MESSAGE value="move listing of student repo dirs into main method and pass list down to functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="move listing of student repo dirs into main method and pass list down to functions" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/grade.rs</url>
+          <line>14</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

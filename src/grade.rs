@@ -1,4 +1,5 @@
 use std::path::{Path, PathBuf};
+use crate::config::Config;
 use crate::git_ops::log;
 
 pub struct RepoStats {
@@ -11,15 +12,13 @@ pub struct RepoStats {
 
 impl RepoStats {}
 
-pub fn grade_student_repos(student_repos: &Vec<PathBuf>, date: &String) -> Vec<RepoStats> {
+pub fn grade_student_repos(student_repos: &Vec<PathBuf>, date: &String, config: &Config) -> Vec<RepoStats> {
     let mut repo_stats: Vec<RepoStats> = Vec::new();
 
     for repo_path in student_repos {
         let path = repo_path.display().to_string();
 
-        // currently we have the prefix "team-project-" hardcoded.
-        // TODO: consider making the prefix configurable
-        let project_name = extract_project_name(&path);
+        let project_name = extract_project_name(&path, &config.prefix);
 
         let stats = analyze_repo(&path, date, project_name);
         repo_stats.push(stats);
@@ -28,11 +27,11 @@ pub fn grade_student_repos(student_repos: &Vec<PathBuf>, date: &String) -> Vec<R
     repo_stats
 }
 
-fn extract_project_name(path: &String) -> String{
+fn extract_project_name(path: &String, prefix: &String) -> String{
     Path::new(path.as_str())
         .file_name()
         .unwrap()
-        .to_string_lossy()[13..]
+        .to_string_lossy()[prefix.len()..].to_string()
         .to_string()
 }
 

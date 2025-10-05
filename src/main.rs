@@ -48,6 +48,6 @@ fn main() -> anyhow::Result<()> {
 
     let student_repos = get_student_repo_paths(root_dir);
     fetch_all_repos(&student_repos);
-    let repo_stats = grade_student_repos(&student_repos, &date);
+    let repo_stats = grade_student_repos(&student_repos, &date, &config);
     write_repo_stats_to_csv_file(repo_stats)
 }

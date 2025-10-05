@@ -7,14 +7,17 @@
 mod git_ops;
 mod grade;
 mod dir_stack_guard;
+mod file_ops;
+mod date_util;
 
 use std::io::Write;
 use std::{env, fs};
-use std::path::PathBuf;
+use crate::date_util::{is_valid_date_string, yesterday_string};
+use crate::file_ops::{get_student_repo_paths, write_repo_stats_to_csv_file};
 use crate::git_ops::fetch_all_repos;
 use crate::grade::grade_student_repos;
 
-fn main() {
+fn main() -> std::io::Result<()> {
     let args : Vec<String> = env::args().collect();
     if args.len() < 2 {
         writeln!(&mut std::io::stderr(), "Usage: cargo run -- [DIRECTORY]").unwrap();
@@ -39,7 +42,8 @@ fn main() {
         date = yesterday_string();
     }
 
+    let student_repos = get_student_repo_paths(root_dir);
     fetch_all_repos(&student_repos);
-    grade_student_repos(&student_repos);
     let repo_stats = grade_student_repos(&student_repos, &date);
+    write_repo_stats_to_csv_file(repo_stats)
 }

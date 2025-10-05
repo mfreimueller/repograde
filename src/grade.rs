@@ -10,8 +10,6 @@ pub struct RepoStats {
     pub(crate) success: bool,
 }
 
-impl RepoStats {}
-
 pub fn grade_student_repos(student_repos: &Vec<PathBuf>, date: &String, config: &Config) -> Vec<RepoStats> {
     let mut repo_stats: Vec<RepoStats> = Vec::new();
 

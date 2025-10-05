@@ -42,6 +42,8 @@ fn main() -> std::io::Result<()> {
         date = yesterday_string();
     }
 
+    let config = read_config("config.toml")?;
+
     let student_repos = get_student_repo_paths(root_dir);
     fetch_all_repos(&student_repos);
     let repo_stats = grade_student_repos(&student_repos, &date);

@@ -2,7 +2,7 @@
  * repograde - CLI tool to automate the fetching and grading of GitHub classroom
  * repositories.
  *
- * USAGE: cargo run -- [DIRECTORY]
+ * USAGE: cargo run -- [DIRECTORY] [DATE (optional)]
  */
 mod git_ops;
 mod grade;
@@ -20,13 +20,13 @@ use crate::grade::grade_student_repos;
 fn main() -> std::io::Result<()> {
     let args : Vec<String> = env::args().collect();
     if args.len() < 2 {
-        writeln!(&mut std::io::stderr(), "Usage: cargo run -- [DIRECTORY]").unwrap();
+        writeln!(&mut std::io::stderr(), "Usage: cargo run -- [DIRECTORY] [DATE (optional)]")?;
         std::process::exit(exitcode::USAGE);
     }
 
     let root_dir = &args[1];
     if fs::exists(root_dir).is_err() {
-        writeln!(&mut std::io::stderr(), "{root_dir} doesn't exist or the required permissions are not set.").unwrap();
+        writeln!(&mut std::io::stderr(), "{root_dir} doesn't exist or the required permissions are not set.")?;
         std::process::exit(exitcode::IOERR);
     }
 

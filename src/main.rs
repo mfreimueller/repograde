@@ -27,11 +27,19 @@ fn main() {
         std::process::exit(exitcode::IOERR);
     }
 
-    let student_repos: Vec<PathBuf> = fs::read_dir(root_dir)
-        .unwrap()
-        .map(|entry| entry.unwrap().path())
-        .collect();
+    // TODO: write args utility
+    let date: String;
+    if args.len() > 2 {
+        if is_valid_date_string(&args[2]) {
+            date = args[2].to_string();
+        } else {
+            date = yesterday_string();
+        }
+    } else {
+        date = yesterday_string();
+    }
 
     fetch_all_repos(&student_repos);
     grade_student_repos(&student_repos);
+    let repo_stats = grade_student_repos(&student_repos, &date);
 }

@@ -1,4 +1,4 @@
-use std::fs;
+use std::{any, fs};
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::path::PathBuf;
@@ -11,7 +11,7 @@ pub fn get_student_repo_paths(root_dir: &String) -> Vec<PathBuf> {
         .collect()
 }
 
-pub fn write_repo_stats_to_csv_file(repo_stats: Vec<RepoStats>) -> std::io::Result<()> {
+pub fn write_repo_stats_to_csv_file(repo_stats: Vec<RepoStats>) -> anyhow::Result<()> {
     let mut file = OpenOptions::new()
         .create(true)
         .append(true)

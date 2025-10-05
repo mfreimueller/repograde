@@ -9,15 +9,17 @@ mod grade;
 mod dir_stack_guard;
 mod file_ops;
 mod date_util;
+mod config;
 
 use std::io::Write;
 use std::{env, fs};
+use crate::config::read_config;
 use crate::date_util::{is_valid_date_string, yesterday_string};
 use crate::file_ops::{get_student_repo_paths, write_repo_stats_to_csv_file};
 use crate::git_ops::fetch_all_repos;
 use crate::grade::grade_student_repos;
 
-fn main() -> std::io::Result<()> {
+fn main() -> anyhow::Result<()> {
     let args : Vec<String> = env::args().collect();
     if args.len() < 2 {
         writeln!(&mut std::io::stderr(), "Usage: cargo run -- [DIRECTORY] [DATE (optional)]")?;

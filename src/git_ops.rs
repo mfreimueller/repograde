@@ -1,4 +1,3 @@
-use std::{fs};
 use std::io::{Error, ErrorKind};
 use std::path::PathBuf;
 use crate::dir_stack_guard::DirStackGuard;

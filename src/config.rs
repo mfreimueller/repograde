@@ -5,6 +5,7 @@ use serde::Deserialize;
 pub struct Config {
     pub(crate) prefix: String,
     pub(crate) minimum_commit_size: i32,
+    pub(crate) csv_file: String,
 }
 
 impl Config {}

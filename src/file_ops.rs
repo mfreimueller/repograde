@@ -2,6 +2,7 @@ use std::{fs};
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::path::PathBuf;
+use crate::config::Config;
 use crate::grade::RepoStats;
 
 pub fn get_student_repo_paths() -> Vec<PathBuf> {
@@ -16,11 +17,11 @@ pub fn get_student_repo_paths() -> Vec<PathBuf> {
         .collect()
 }
 
-pub fn write_repo_stats_to_csv_file(repo_stats: Vec<RepoStats>) -> anyhow::Result<()> {
+pub fn write_repo_stats_to_csv_file(repo_stats: Vec<RepoStats>, config: &Config) -> anyhow::Result<()> {
     let mut file = OpenOptions::new()
         .create(true)
         .append(true)
-        .open("logs.csv")?;
+        .open(config.csv_file.clone())?;
 
     for stat in repo_stats {
         write_stat(&mut file, stat)?;

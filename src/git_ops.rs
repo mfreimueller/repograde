@@ -3,12 +3,13 @@ use std::io::{Error, ErrorKind};
 use std::path::PathBuf;
 use crate::dir_stack_guard::DirStackGuard;
 
-pub fn log(path: String) -> Result<String, Error> {
+pub fn log(path: &String, date: &String) -> Result<String, Error> {
     let _guard = DirStackGuard::push_dir(path)?;
 
+    let since = format!("--since={}", date);
     let output = std::process::Command::new("git")
         .arg("log")
-        .arg("--since=")
+        .arg(since)
         .arg("--pretty=tformat:")
         .arg("--numstat")
         .arg("--all")

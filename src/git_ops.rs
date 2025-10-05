@@ -35,11 +35,6 @@ pub fn fetch_all_repos(student_repos: &Vec<PathBuf>) {
 }
 
 fn fetch(dir: &String) {
-    if fs::exists(dir).is_err() {
-        println!("Skipping {dir} - no git-repository found!");
-        return;
-    }
-
     let _guard = DirStackGuard::push_dir(dir).unwrap();
 
     std::process::Command::new("git")

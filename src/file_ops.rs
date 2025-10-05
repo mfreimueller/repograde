@@ -4,10 +4,15 @@ use std::io::Write;
 use std::path::PathBuf;
 use crate::grade::RepoStats;
 
-pub fn get_student_repo_paths(root_dir: &String) -> Vec<PathBuf> {
-    fs::read_dir(root_dir)
+pub fn get_student_repo_paths() -> Vec<PathBuf> {
+    fs::read_dir(std::env::current_dir().unwrap())
         .unwrap()
         .map(|entry| entry.unwrap().path())
+        .filter(|path| path.is_dir())
+        .filter(|path| {
+            let git_path = format!("{}/.git", path.display());
+            fs::exists(git_path).unwrap()
+        })
         .collect()
 }
 

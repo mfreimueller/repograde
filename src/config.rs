@@ -4,7 +4,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 pub struct Config {
     pub(crate) prefix: String,
-    pub(crate) minimum_commit_size: usize,
+    pub(crate) minimum_commit_size: i32,
 }
 
 impl Config {}

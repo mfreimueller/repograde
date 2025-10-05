@@ -20,7 +20,7 @@ pub fn grade_student_repos(student_repos: &Vec<PathBuf>, date: &String, config: 
 
         let project_name = extract_project_name(&path, &config.prefix);
 
-        let stats = analyze_repo(&path, date, project_name);
+        let stats = analyze_repo(&path, date, project_name, config.minimum_commit_size);
         repo_stats.push(stats);
     }
 
@@ -35,7 +35,7 @@ fn extract_project_name(path: &String, prefix: &String) -> String{
         .to_string()
 }
 
-fn analyze_repo(path: &String, date: &String, project_name: String) -> RepoStats {
+fn analyze_repo(path: &String, date: &String, project_name: String, minimum_commit_size: i32) -> RepoStats {
     let date = String::from(date);
     let log_result = log(path, &date);
 
@@ -64,8 +64,7 @@ fn analyze_repo(path: &String, date: &String, project_name: String) -> RepoStats
     });
 
     let total_change_count = added - removed;
-    // TODO: make 50 (i.e. a 'substantial commit size' configurable)
-    let passes_minimum = total_change_count >= 50;
+    let passes_minimum = total_change_count >= minimum_commit_size;
 
     if passes_minimum {
         println!("✅ PASS: {project_name}")

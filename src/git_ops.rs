@@ -11,7 +11,7 @@ pub fn log(path: String) -> Result<String, Error> {
         .arg("--since=")
         .arg("--pretty=tformat:")
         .arg("--numstat")
-        .arg("-all")
+        .arg("--all")
         .output()?;
 
     if !output.status.success() {

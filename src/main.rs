@@ -24,7 +24,7 @@ fn main() -> anyhow::Result<()> {
         args.date = yesterday_string();
     }
 
-    let config = read_config("config.toml")?;
+    let config = read_config("repograde.toml")?;
 
     let student_repos = get_student_repo_paths();
     fetch_all_repos(&student_repos);

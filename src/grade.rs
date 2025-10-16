@@ -38,7 +38,7 @@ fn analyze_repo(path: &String, date: &String, project_name: String, minimum_comm
     let log_result = log(path, &date);
 
     if log_result.is_err() {
-        eprintln!("❌ FAIL: {project_name}");
+        eprintln!("❌ ERROR: {project_name} ({log_result:?})");
         return RepoStats {
             project_name,
             date,
@@ -65,9 +65,9 @@ fn analyze_repo(path: &String, date: &String, project_name: String, minimum_comm
     let passes_minimum = total_change_count >= minimum_commit_size;
 
     if passes_minimum {
-        println!("✅ PASS: {project_name}")
+        println!("✅ PASS: {project_name} ({total_change_count} >= {minimum_commit_size})")
     } else {
-        println!("❌ FAIL: {project_name}")
+        println!("❌ FAIL: {project_name} ({total_change_count} < {minimum_commit_size})")
     }
 
     RepoStats {

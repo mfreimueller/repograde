@@ -30,7 +30,6 @@ pub fn log(path: &String, date: &String) -> Result<String, Error> {
 
 pub async fn fetch_all_repos(student_repos: &Vec<PathBuf>) {
     let fetches = student_repos.into_iter().map(|repo_path| async move {
-        println!("Fetching {:?}", repo_path);
         let status = Command::new("git")
             .arg("fetch")
             .arg("origin")

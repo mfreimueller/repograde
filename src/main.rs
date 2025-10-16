@@ -27,7 +27,11 @@ fn main() -> anyhow::Result<()> {
     let config = read_config(args.config_file)?;
 
     let student_repos = get_student_repo_paths();
-    fetch_all_repos(&student_repos);
+
+    println!( "Fetching all repositories...");
+    let _ = tokio::runtime::Runtime::new()?
+        .block_on(fetch_all_repos(&student_repos));
+
     let repo_stats = grade_student_repos(&student_repos, &args.date, &config);
     write_repo_stats_to_csv_file(repo_stats, &config)
 }

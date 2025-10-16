@@ -1,6 +1,8 @@
 use std::io::{Error, ErrorKind};
-use std::path::PathBuf;
+use std::path::{PathBuf};
 use crate::dir_stack_guard::DirStackGuard;
+use futures::future::join_all;
+use tokio::process::Command;
 
 pub fn log(path: &String, date: &String) -> Result<String, Error> {
     let _guard = DirStackGuard::push_dir(path)?;
@@ -26,19 +28,23 @@ pub fn log(path: &String, date: &String) -> Result<String, Error> {
     Ok(out)
 }
 
-pub fn fetch_all_repos(student_repos: &Vec<PathBuf>) {
-    for repo_path in student_repos {
-        let path = repo_path.display().to_string();
-        fetch(&path);
-    }
-}
+pub async fn fetch_all_repos(student_repos: &Vec<PathBuf>) {
+    let fetches = student_repos.into_iter().map(|repo_path| async move {
+        println!("Fetching {:?}", repo_path);
+        let status = Command::new("git")
+            .arg("fetch")
+            .arg("origin")
+            .current_dir(repo_path)
+            .status()
+            .await?;
 
-fn fetch(dir: &String) {
-    let _guard = DirStackGuard::push_dir(dir).unwrap();
+        if status.success() {
+            Ok(())
+        } else {
+            println!("❌ Fetch failed for {}", repo_path.display());
+            Err(anyhow::anyhow!("Fetch failed"))
+        }
+    });
 
-    std::process::Command::new("git")
-        .arg("fetch")
-        .arg("origin")
-        .spawn()
-        .unwrap();
+    join_all(fetches).await;
 }

@@ -33,5 +33,10 @@ fn main() -> anyhow::Result<()> {
         .block_on(fetch_all_repos(&student_repos));
 
     let repo_stats = grade_student_repos(&student_repos, &args.date, &config);
-    write_repo_stats_to_csv_file(repo_stats, &config)
+
+    if !args.dry_run {
+        write_repo_stats_to_csv_file(repo_stats, &config)
+    } else {
+        Ok(())
+    }
 }

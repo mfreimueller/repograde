@@ -41,7 +41,7 @@ fn analyze_repo(path: &String, date: &String, project_name: String, minimum_comm
         eprintln!("❌ ERROR: {project_name} ({log_result:?})");
         return RepoStats {
             project_name,
-            date,
+            date, // TODO: we want to make this configurable
             lines_added: 0,
             lines_removed: 0,
             success: false,

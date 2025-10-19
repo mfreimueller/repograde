@@ -1,5 +1,9 @@
 use chrono::{Duration, Local, NaiveDate};
 
+pub fn today_string() -> String {
+    Local::now().format("%Y-%m-%d").to_string()
+}
+
 pub fn yesterday_string() -> String {
     let today = Local::now().date_naive();
     let one_day = Duration::days(1);

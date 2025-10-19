@@ -20,8 +20,8 @@ use crate::grade::grade_student_repos;
 
 fn main() -> anyhow::Result<()> {
     let mut args = Args::parse();
-    if args.date.is_empty() || !is_valid_date_string(&args.date) {
-        args.date = yesterday_string();
+    if args.from_date.is_empty() || !is_valid_date_string(&args.from_date) {
+        args.from_date = yesterday_string();
     }
 
     let config = read_config(args.config_file)?;
@@ -32,7 +32,7 @@ fn main() -> anyhow::Result<()> {
     let _ = tokio::runtime::Runtime::new()?
         .block_on(fetch_all_repos(&student_repos));
 
-    let repo_stats = grade_student_repos(&student_repos, &args.date, &config);
+    let repo_stats = grade_student_repos(&student_repos, &args.from_date, &config);
 
     if !args.dry_run {
         write_repo_stats_to_csv_file(repo_stats, &config)

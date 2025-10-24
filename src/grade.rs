@@ -56,8 +56,8 @@ fn analyze_repo(path: &String, date: &String, project_name: String, minimum_comm
         let parts = line.split_whitespace().collect::<Vec<&str>>();
 
         if parts.len() > 2 {
-            added += parts[0].parse::<i32>().unwrap();
-            removed -= parts[1].parse::<i32>().unwrap();
+            added += parts[0].parse::<i32>().unwrap_or_else(|_| 0);
+            removed -= parts[1].parse::<i32>().unwrap_or_else(|_| 0);
         }
     });
 

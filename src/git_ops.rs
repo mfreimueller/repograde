@@ -4,13 +4,15 @@ use crate::dir_stack_guard::DirStackGuard;
 use futures::future::join_all;
 use tokio::process::Command;
 
-pub fn log(path: &String, date: &String) -> Result<String, Error> {
+pub fn log(path: &String, from_date: &String, to_date: &String) -> Result<String, Error> {
     let _guard = DirStackGuard::push_dir(path)?;
 
-    let since = format!("--since={}", date);
+    let since = format!("--since=\"{}\"", from_date);
+    let until = format!("--until=\"{}\"", to_date);
     let output = std::process::Command::new("git")
         .arg("log")
         .arg(since)
+        .arg(until)
         .arg("--pretty=tformat:")
         .arg("--numstat")
         .arg("--all")

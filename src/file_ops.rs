@@ -31,11 +31,11 @@ pub fn write_repo_stats_to_csv_file(repo_stats: Vec<RepoStats>, config: &Config)
 }
 
 fn write_stat(file: &mut File, stat: RepoStats) -> std::io::Result<()> {
-    let date = stat.date;
+    let range = stat.range;
     let project_name = stat.project_name;
     let added = stat.lines_added;
     let removed = stat.lines_removed;
     let status = if stat.success { "PASS" } else { "FAIL" };
 
-    writeln!(file, "{date};{project_name};{added};{removed};{status}")
+    writeln!(file, "{range};{project_name};{added};{removed};{status}")
 }

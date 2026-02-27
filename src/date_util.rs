@@ -5,7 +5,7 @@ pub fn today_string() -> String {
 }
 
 pub fn yesterday_string() -> String {
-    let today = Local::now().date_naive();
+    let today = Local::now();
     let one_day = Duration::days(1);
     let yesterday = today - one_day;
 

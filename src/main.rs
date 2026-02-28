@@ -28,6 +28,11 @@ fn main() -> anyhow::Result<()> {
         args.from_date = yesterday_string();
     }
 
+    if std::fs::metadata(&args.config_file).is_err() {
+        println!("Config file does not exist");
+        std::process::exit(1);
+    }
+
     let config = read_config(args.config_file)?;
 
     let student_repos = get_student_repo_paths();

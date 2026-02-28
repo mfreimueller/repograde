@@ -1,6 +1,12 @@
 use std::path::{Path, PathBuf};
-use crate::config::Config;
 use crate::git_ops::log;
+
+pub struct GradingConfig {
+    pub(crate) from_date: String,
+    pub(crate) to_date: String,
+    pub(crate) prefix: String,
+    pub(crate) minimum_commit_size: i32,
+}
 
 pub struct RepoStats {
     pub(crate) project_name: String,
@@ -10,7 +16,7 @@ pub struct RepoStats {
     pub(crate) success: bool,
 }
 
-pub fn grade_student_repos(student_repos: &Vec<PathBuf>, from_date: &String, to_date: &String, config: &Config) -> Vec<RepoStats> {
+pub fn grade_student_repos(student_repos: &Vec<PathBuf>, config: GradingConfig) -> Vec<RepoStats> {
     let mut repo_stats: Vec<RepoStats> = Vec::new();
 
     for repo_path in student_repos {
@@ -18,7 +24,7 @@ pub fn grade_student_repos(student_repos: &Vec<PathBuf>, from_date: &String, to_
 
         let project_name = extract_project_name(&path, &config.prefix);
 
-        let stats = analyze_repo(&path, from_date, to_date, project_name, config.minimum_commit_size);
+        let stats = analyze_repo(&path, project_name, &config);
         repo_stats.push(stats);
     }
 
@@ -33,9 +39,12 @@ fn extract_project_name(path: &String, prefix: &String) -> String{
         .to_string()
 }
 
-fn analyze_repo(path: &String, from_date: &String, to_date: &String, project_name: String, minimum_commit_size: i32) -> RepoStats {
-    let log_result = log(path, from_date, to_date);
-    let range = format!("{from_date} - {to_date}");
+fn analyze_repo(path: &String, project_name: String, config: &GradingConfig) -> RepoStats {
+    let log_result = log(path, &config.from_date, &config.to_date);
+
+    let from_date_str = config.from_date.as_str();
+    let to_date_str = config.to_date.as_str();
+    let range = format!("{from_date_str} - {to_date_str}");
 
     if log_result.is_err() {
         eprintln!("❌ ERROR: {project_name} ({log_result:?})");
@@ -62,6 +71,8 @@ fn analyze_repo(path: &String, from_date: &String, to_date: &String, project_nam
     });
 
     let total_change_count = added - removed;
+
+    let minimum_commit_size = config.minimum_commit_size;
     let passes_minimum = total_change_count >= minimum_commit_size;
 
     if passes_minimum {

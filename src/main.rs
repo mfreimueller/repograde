@@ -16,7 +16,7 @@ use crate::config::read_config;
 use crate::date_util::{is_valid_date_string, today_string, yesterday_string};
 use crate::file_ops::{get_student_repo_paths, write_repo_stats_to_csv_file};
 use crate::git_ops::fetch_all_repos;
-use crate::grade::grade_student_repos;
+use crate::grade::{grade_student_repos, GradingConfig};
 
 fn main() -> anyhow::Result<()> {
     let mut args = Args::parse();
@@ -41,7 +41,14 @@ fn main() -> anyhow::Result<()> {
     let _ = tokio::runtime::Runtime::new()?
         .block_on(fetch_all_repos(&student_repos));
 
-    let repo_stats = grade_student_repos(&student_repos, &args.from_date, &args.to_date, &config);
+    let grading_config = GradingConfig {
+        from_date: args.from_date,
+        to_date: args.to_date,
+        prefix: config.prefix.clone(),
+        minimum_commit_size: config.minimum_commit_size,
+    };
+
+    let repo_stats = grade_student_repos(&student_repos, grading_config);
 
     if !args.dry_run {
         write_repo_stats_to_csv_file(repo_stats, &config)
